@@ -1,13 +1,11 @@
-const { metricsMiddleware } = require("./monitoring/setup");
-const promClient = require("prom-client");
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 const logger = require('./utils/logger');
-const youTubeRoutes = require('./routes/youtubeRoutes');
-const instagramRoutes = require('./routes/instagramRoutes');
+
+const drimsApiRoutes = require('./routes/drimsApiRoutes');
 
 const app = express();
 
@@ -29,15 +27,8 @@ app.get('/api/v1/health', (req, res) => {
     })
 });
 
-// Metrics endpoint
-app.get('/api/v1/metrics', (req, res) => {
-    res.set('Content-Type', promClient.register.contentType);
-    promClient.register.metrics().then(data => res.send(data));
-});
-
 // Routes
-app.use('/api/v1/youtube', youTubeRoutes);
-app.use('/api/v1/instagram', instagramRoutes);
+app.use('/api/v1', drimsApiRoutes);
 
 // Error handling
 app.use(notFound);
