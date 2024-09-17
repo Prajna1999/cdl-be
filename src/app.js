@@ -6,7 +6,7 @@ const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 const logger = require('./utils/logger');
 
 const drimsApiRoutes = require('./routes/drimsApiRoutes');
-
+const bmaApiRoutes = require('./routes/bmaApiRoutes');
 const app = express();
 
 // Middlewares
@@ -29,6 +29,7 @@ app.get('/api/v1/health', (req, res) => {
 
 // Routes
 app.use('/api/v1', drimsApiRoutes);
+app.use('/api/v1', bmaApiRoutes);
 
 // Error handling
 app.use(notFound);

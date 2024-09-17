@@ -1,10 +1,8 @@
-// src/services/youtubeService.js
 const axios = require('axios');
 const config = require('../../config');
 const logger = require('../utils/logger');
 const fs = require('fs');
 const path = require('path');
-// const { generate } = require('csv-generate');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 class DrimsAPiService {
@@ -136,7 +134,7 @@ class DrimsAPiService {
 
             const result = {
                 affectedPopulation: this.processAffectedPopulation(response.data.affectedPopulation),
-                livesLostConfirmed: this.processLivesLost(response.data.livesLostConfirmed),
+                livesLostConfirmed: this.processLivesLost(response.data.hllDetails?.confirmed),
                 emabankmentBreached: this.processInfrastructureDamage(response.data.infDamageDetails?.embBreached, 'embankmentBreached'),
                 embankmentAffected: this.processInfrastructureDamage(response.data.infDamageDetails?.embAffected, 'embankmentAffected'),
                 roadAffected: this.processInfrastructureDamage(response.data.infDamageDetails?.roadAffected, 'roadAffected'),
