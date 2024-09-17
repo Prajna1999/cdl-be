@@ -4,7 +4,7 @@ const csv = require('csv-stringify');
 class BmaApiController {
     async getFloodDetails(req, res, next) {
         try {
-            const { limit } = req.body;
+            const { limit } = req.query;
             if (!limit) {
                 logger.info('limit is not given')
             }
